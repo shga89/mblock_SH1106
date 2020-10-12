@@ -1,0 +1,71 @@
+{	"extensionName": "SH1106 OLED 디스플레이",
+	"description": "OLED 디스플레이 SH1106에 대한 엠블럭 확장 블럭입니다. olikraus의 u8glib(https://github.com/olikraus/u8glib)를 기반으로 제작되었으며, 이 확장 블럭 새로운 BSD를 따릅니다.",
+	"version": "0.2",
+	"author": "Gaduino",
+	"homepage": "http://www.github.com/shga89",
+	"sort":0,
+	"javascriptURL":"js/SH1106.js",
+    "firmware":"1.0",
+    "extensionPort":0,
+	"blockSpecs": [
+		[
+			"w",
+			"Initialize OLED Display (SH1106)",
+			"SH1106Init",
+			{
+				"setup":"
+\/******** SH1106 Setup *********\/
+g_pLCD = sh1106_lcd::getInstance();
+if (g_pLCD != NULL) g_pLCD->ClearScreen();
+g_writeValue = true;
+\/******************************\/\n",
+				"inc":"#include \"sh1106.h\"\n",
+				"def":" 
+\/******** SH1106 Define ********\/
+volatile boolean g_writeValue = false;
+volatile int g_displayValue = 0;
+
+sh1106_lcd *g_pLCD = NULL;
+\/******************************\/\n",
+				"work":"",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"Print String %s at OLED",
+			"SH1106PrintLine",
+			"",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"g_pLCD->PrintLine({0});\r\n",
+				"loop":""
+			}
+		],
+		[
+			"w",
+			"Clear the Screen",
+			"SH1106Clear",
+			{
+				"setup":"",
+				"inc":"",
+				"def":"",
+				"work":"g_pLCD->ClearScreen();\r\n",
+				"loop":""
+			}
+		]
+	],
+	"menus": {
+	},
+	"values": {
+	},
+	"translators":{
+		"ko":{
+			"Initialize OLED Display (SH1106)":"OLED 디스플레이 (SH1106) 초기화",
+			"Print String %s at OLED":"OLED에 문자열 %s 출력",
+			"Clear the Screen":"화면 비우기"
+		}		
+	}
+}
